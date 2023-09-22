@@ -7,6 +7,7 @@ import UpdatePokemon from "./UpdatePokemon";
 import useUpdatePokemonMutation from "../Hooks/useUpdatePokemonMutation";
 import useDeletePokemonMutation from "../Hooks/useDeletePokemonMutation";
 import { useHistory } from "react-router-dom";
+import HomeDeduping from "./HomeDeduping";
 
 function Home() {
   const history = useHistory();
@@ -74,6 +75,7 @@ function Home() {
           </Grid>
         ))}
       </Grid>
+      <HomeDeduping />
       <SlideDialog isOpen={openUpdate} onClose={() => setOpenUpdate(false)}>
         <UpdatePokemon
           initialValues={initialValues}
