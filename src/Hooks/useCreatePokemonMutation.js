@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
-const createPokemon = async ({ name, imageUrl }) => {
+const createPokemon = async ({ name, imgUrl }) => {
     // return Promise.reject({ message: "Data has error" })
-    const response = await axios.post(`http://localhost:3030/pokemons`, { name, imageUrl });
+    const response = await axios.post(`http://localhost:3030/pokemons`, { name, imgUrl });
     return response.data;
 };
 
