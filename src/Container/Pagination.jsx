@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { Box, IconButton } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, IconButton, Grid } from "@mui/material";
 import usePaginated from "../Hooks/usePaginated";
-import Slider from "react-slick";
 import PokemonCard from "../Components/PokemonCard";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -15,22 +14,20 @@ function Pagination() {
     isFetching,
     // isPreviousData,
     hasNextPage,
+    refetch,
   } = usePaginated(page);
+
+  useEffect(() => {
+    refetch();
+  }, [page, refetch]);
+
   const handleNext = () => {
     setPage(page + 1);
   };
 
   const handlePrev = () => {
     setPage(page - 1);
-  };
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-  };
+  }; 
 
   if (status === "loading") {
     return <Box sx={{ mx: "auto" }}>Loading...</Box>;
@@ -41,13 +38,14 @@ function Pagination() {
   }
 
   return (
-    <Box flex={1} display="flex" justifyContent={"center"}>
+    <Box flex={1} display={"flex"} flexDirection="column">
       <Box
         flex={1}
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
         rowGap={2}
+        overflow={"hidden"}
       >
         <IconButton
           onClick={() => handlePrev()}
@@ -55,13 +53,17 @@ function Pagination() {
         >
           <ArrowLeftIcon />
         </IconButton>
-        <Slider {...settings}>
-          {data.map((pokemon, index) => (
-            <Box key={index} sx={{ m: 1 }}>
-              <PokemonCard pokemon={pokemon} />
-            </Box>
-          ))}
-        </Slider>
+        <Box flex={1} sx={{ overflowY: "auto", height: "100%" }}>
+          <Box sx={{ p: 1 }}>
+            <Grid container spacing={2}>
+              {data.map((pokemon, index) => (
+                <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                  <PokemonCard pokemon={pokemon} />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Box>
         <IconButton
           onClick={() => handleNext()}
           disabled={!hasNextPage || isFetching}
@@ -69,6 +71,7 @@ function Pagination() {
           <ArrowRightIcon />
         </IconButton>
       </Box>
+      {isFetching && <Box>Loading</Box>}
     </Box>
   );
 }

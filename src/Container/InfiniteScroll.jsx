@@ -27,7 +27,15 @@ export default function InfiniteScroll() {
   }
 
   return (
-    <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+    <Box
+      sx={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Virtuoso
         style={{ width: "350px", flex: 1 }}
         totalCount={pokemons?.length ? pokemons?.length : 0}

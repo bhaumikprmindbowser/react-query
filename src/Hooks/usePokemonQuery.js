@@ -8,7 +8,10 @@ const fetchPokemons = async ({ limit }) => {
 };
 
 const usePokemonQuery = (limit = 30) => {
-    return useQuery(['pokemons', { limit }], () => fetchPokemons({ limit }));
+    return useQuery(['pokemons', { limit }], () => fetchPokemons({ limit }), { 
+        // staleTime: 0, 
+        // refetchInterval: 1000 * 60 * 1, 
+    });
 };
 
 export default usePokemonQuery;
