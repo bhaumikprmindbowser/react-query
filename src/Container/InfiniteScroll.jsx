@@ -41,7 +41,7 @@ export default function InfiniteScroll() {
         totalCount={pokemons?.length ? pokemons?.length : 0}
         data={pokemons ? pokemons : []}
         endReached={() => {
-          if (hasNextPage) {
+          if (hasNextPage && !isFetchingNextPage) {
             fetchNextPage();
           }
         }}
