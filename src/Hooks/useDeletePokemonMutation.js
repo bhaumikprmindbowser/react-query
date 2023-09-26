@@ -16,7 +16,7 @@ const useDeletePokemonMutation = () => {
             queryClient.setQueryData(['pokemons', { limit: 50 }], (prevPokemon) => {
                 return prevPokemon.filter(pokemon => pokemon?.id !== id)
             })
-            // queryClient.invalidateQueries({ queryKey: ['pokemons'] });
+            // queryClient.invalidateQueries({ queryKey: ['pokemons',{ limit: 50 }] });
         },
         // onMutate: (variables) => {
         //     console.log(variables, "variables")

@@ -21,7 +21,7 @@ const useUpdatePokemonMutation = () => {
                 }
                 return tempPrevPokemon
             })
-            // queryClient.invalidateQueries({ queryKey: ['pokemons'], exact: true });
+            // queryClient.invalidateQueries({ queryKey: ['pokemons',{ limit: 50 }], exact: true });
         },
     });
 
